@@ -1,0 +1,11 @@
+Uuid: e3edbd0737f443e98292e779e012f87d
+ExtensionType: 1
+Name: JDSer-ngng
+ScreenVersion: 1.0
+SerialVersion: 2
+MinPlatformVersion: 0
+ProOnly: False
+Author: Jon Murray, NCC Group
+ShortDescription: Takes deserialized Java objects and encodes them in XML.
+EntryPoint: build/libs/java-deserializer-all.jar
+BuildCommand: gradle -PburpJar=$BURP_JAR fatJar
