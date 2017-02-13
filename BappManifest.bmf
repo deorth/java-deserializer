@@ -1,6 +1,7 @@
 Uuid: e3edbd0737f443e98292e779e012f87d
 ExtensionType: 1
 Name: JDSer-ngng
+RepoName: java-deserializer
 ScreenVersion: 1.0
 SerialVersion: 2
 MinPlatformVersion: 0
