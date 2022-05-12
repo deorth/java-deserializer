@@ -73,10 +73,12 @@ class JDTab implements IMessageEditorTab
 
         } else {
 
+            
             try {
                 //serialize to java and set the text
                 txtInput.setText(JDUtils.toXML(content, helpers));
             } catch (IOException | ClassNotFoundException ex) {
+                System.out.println(ex);
                 Logger.getLogger(BurpExtender.class.getName()).log(Level.SEVERE, null, ex);
                 txtInput.setText(helpers.stringToBytes("Unable to deserailize, most likely you have not loaded the corresponding JAR\n\n" + ex.fillInStackTrace()));
             }

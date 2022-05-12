@@ -36,7 +36,8 @@ public class JDUtils {
 
     private static XStream xstream = new XStream(new DomDriver());
     protected static ClassLoader loader;
-    private static final String LIB_DIR = "./libs/";
+//    private static final String LIB_DIR = "./libs/";
+    private static final String LIB_DIR = "/Users/ahorn/burplibs";
     private static byte[] crap;
     public static byte[] serializeMagic = new byte[]{-84, -19};
     private static Object obj;
@@ -80,7 +81,9 @@ public class JDUtils {
     {
         CustomLoaderObjectInputStream is = null;
 
-        int magicPos = helpers.indexOf(plaintext, serializeMagic, false, 0, plaintext.length);
+       // int magicPos = helpers.indexOf(plaintext, serializeMagic, false, 0, plaintext.length);
+        int magicPos = JDUtils.indexOf(plaintext, serializeMagic);
+
         int msgBody = helpers.analyzeRequest(plaintext).getBodyOffset();
 
         // get serialized data
@@ -140,9 +143,24 @@ public class JDUtils {
         loader = createURLClassLoader(LIB_DIR);
     }
 
+    public static int indexOf(byte[] outerArray, byte[] smallerArray) {
+        for(int i = 0; i < outerArray.length - smallerArray.length+1; ++i) {
+            boolean found = true;
+            for(int j = 0; j < smallerArray.length; ++j) {
+               if (outerArray[i+j] != smallerArray[j]) {
+                   found = false;
+                   break;
+               }
+            }
+            if (found) return i;
+         }
+       return -1;  
+    }  
+
     public static boolean isJD(byte[] content, IExtensionHelpers helpers)
     {
-        return helpers.indexOf(content, JDUtils.serializeMagic, false, 0, content.length) > -1;
+       // return helpers.indexOf(content, JDUtils.serializeMagic, false, 0, content.length) > -1;
+       return JDUtils.indexOf(content,JDUtils.serializeMagic ) > -1;
     }
 
     public static boolean hasMagicHeader(byte[] content, IExtensionHelpers helpers)
@@ -151,3 +169,4 @@ public class JDUtils {
     }
 
 }
+

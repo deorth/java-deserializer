@@ -34,6 +34,7 @@ public class JDHttpListener implements IHttpListener {
     @Override
     public void processHttpMessage(int toolFlag, boolean messageIsRequest, IHttpRequestResponse messageInfo)
     {
+        
         if (toolFlag == IBurpExtenderCallbacks.TOOL_SCANNER || toolFlag == IBurpExtenderCallbacks.TOOL_INTRUDER || toolFlag == IBurpExtenderCallbacks.TOOL_PROXY)
         {
 
@@ -63,6 +64,7 @@ public class JDHttpListener implements IHttpListener {
             //if it is a response, and looks like java, and comes from the scanner convert it to XML so that stack traces and error messages, etc. can be picked up on)
             else if (toolFlag == IBurpExtenderCallbacks.TOOL_SCANNER && JDUtils.isJD(messageInfo.getResponse(), helpers))
             {
+
                 try {
                     byte[] XML = JDUtils.toXML(messageInfo.getResponse(), helpers);
                     List<String> headers = helpers.analyzeRequest(messageInfo.getResponse()).getHeaders();
